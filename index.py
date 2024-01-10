@@ -1,20 +1,24 @@
 import requests
+from bs4 import BeautifulSoup
 
-resp = requests.get("http://127.0.0.1:3000/")
-# print("HTML RES:")
-# print(resp.text)
-# print("")
+resp = requests.get("https://tmy.io")
+
 # if 'Heyy' in resp.text:
 # 	print('Test passed')
 # else:
 # 	print('Test failed')
 
 
-from bs4 import BeautifulSoup
+
 
 soup = BeautifulSoup(resp.text, "html.parser")
 
-buttons = soup.find_all("button")
+print(soup.prettify())
 
-print(len(buttons))
-print(buttons)
+buttons = soup.find_all("button")
+loginButton = soup.find(id="login-btn")
+
+# BeautifulSoup + python assertion
+if loginButton:
+	print('Test passed')
+
